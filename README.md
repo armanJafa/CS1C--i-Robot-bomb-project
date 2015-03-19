@@ -9,10 +9,7 @@ Submit a UML class diagram, at least three use cases, and a state diagram with y
 
 The assignment will be graded using the following scale:
  
-Schedule:
-First checkpoint – April 16th – 5 points
-Second checkpoint – April 30th – 5 points
-Final checkpoint – May 12th – 25 points
+
 The iRobotsTheBomb on-line pamphlet must:
 1.	Provide a help option to explain how to operate your program
 2.	Contain a sales pitch that includes key selling points – keeping the target market in mind.
@@ -33,3 +30,11 @@ The iRobotsTheBomb on-line pamphlet must:
 17.	 After a pamphlet is sent to a perspective customer, the customer list should reflect the fact that the pamphlet was sent.
 18.	 Produce a customer listing sorted by customer name (at any time) - administrator only
 19.	Produce a customer listing sorted by customer name (at any time) containing only the “key” customers. – administrator only
+
+
+
+
+Schedule:
+* First checkpoint – April 16th – 5 points
+* Second checkpoint – April 30th – 5 points
+* Final checkpoint – May 12th – 25 points
