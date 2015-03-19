@@ -1,7 +1,7 @@
 iRobotsTheBomb Inc. 
 You are to create an on-line pamphlet for iRobotsTheBomb Inc.  The company sells robots that can detect and dispose of explosive devices.
 
-You must use inheritance, composition, exception handlers, a virtual function, and at least two overloaded operators.  At least one class should use templates. At least one class must contain a pointer (a copy constructor needs to be written and tested).   Highlight the above.
+* You must use inheritance, composition, exception handlers, a virtual function, and at least two overloaded operators.  At least one class should use templates. At least one class must contain a pointer (a copy constructor needs to be written and tested). *   Highlight the above.
 
 Design a very readable, easy to use interface to demonstrate your program.  Contingency handling should include addressing invalid input.  Please let me know who your partner will be by March 19th (two points will be deducted from your score if you do not meet this deadline). All projects are due by May 12th.   No late projects will be accepted. Your team must demonstrate your project to me before it will be graded.   Each teammate must identify their accomplishments on the project.  
 
