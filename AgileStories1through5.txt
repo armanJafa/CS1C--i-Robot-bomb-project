@@ -1,0 +1,53 @@
+TEMPLATE: 
+#x  As a user of this program, I'd like to see the name of this program, what this program will do, 
+as well as a menu of options listed beneath- ...
+  a. Story Point:  1-Simple Base 10-Highest Complex Xpts  -TeamMember
+  b. Priority:  1-High 10-Low (ie. 3 -TeamMember)
+  c. Tasks and Tests: "Description of specific task and test 
+                        inside a text block" -TeamMember
+                        
+  d. Finished Condition: "Opinion: Finished condition when x is fulfilled" -TeamMember
+  
+  =================================================================
+#1.As a customer, I would like to be able to pull up a help option so that i could seek help on how to use the program
+  a. Story Point Estimation: 1
+  b. Priority: 10
+  c. Tasks and tests: 
+                      -Write help text
+                      -test that it displays properly and formatted
+  d. Finished Condition: The help text is properly displayed
+
+#2.As a salesperson, I would like to be able to provide my customers a sales pitch in order to sell them on the key points of my product  
+  a. Story Point Estimation: 1
+  b. Priority: 10
+  c. Tasks and tests:
+                      -Write sales pitch text
+                      -test that it displays properly and formatted
+  d. Finished Condition: The sales pitch is written and displayed properly. 
+  
+#3. As a salesperson, I would like to provide a list of physical environments that our robots support to the customer. 
+  a. Story Point Estimation: 2
+  b. Priority: 9
+  c. Tasks and tests: 
+                      -Write the list of environments supported
+                      -Test that this list properly outputs 
+  d. Finished Condition: The text is written and properly displayed
+  
+#4. As a salesperson, I would like to provide my customers with a paragraph describing what our robots can do and how they do it.
+  a. Story Point Estimation: 2
+  b. Priority: 8 
+  c. Tasks and tests: 
+                      -Write the paragraph of the concepts of operation. 
+                      -Test that the paragraph properly displays
+  d. Finished Conditions: The paragraph is written and properly displayed
+  
+#5. As a salesperson, I would like to provide my customers with three different robot options along with a corresponding price 
+for the three options.
+  a. Story Point Estimation: 3
+  b. Priority: 6
+  c. Tasks and tests: 
+                      -Write the three different options with the three prices
+                      -Test that the three options display properly
+                      -Make sure the user could select one of these three options
+  d. Finished Conditions: The text is written, the text properly displays, and the user can select an option. 
+
