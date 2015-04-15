@@ -36,6 +36,12 @@ Customer::Customer(string tempCompanyName, string tempStreetAddress,
 
 }
 
+//destructor
+Customer::~Customer()
+{
+
+}
+
 //virtual function, base data printed
 void Customer::Print()
 {
