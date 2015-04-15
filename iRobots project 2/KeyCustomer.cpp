@@ -30,6 +30,12 @@ KeyCustomer::KeyCustomer(string tempCompanyName, string tempStreetAddress,
 
 }
 
+//Destructor
+KeyCustomer::~KeyCustomer()
+{
+
+}
+
 //virtual method to print extra field in derived class
 void KeyCustomer::Print()
 {
