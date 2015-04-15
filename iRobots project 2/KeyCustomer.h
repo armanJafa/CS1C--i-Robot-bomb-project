@@ -23,6 +23,9 @@ public:
 	KeyCustomer(string, string, string, string, string);
 	//non-default constructor
 
+	virtual ~KeyCustomer();
+	//Destructor
+
 	virtual void Print();
 	//virtual print method
 
