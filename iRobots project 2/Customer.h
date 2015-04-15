@@ -35,6 +35,9 @@ public:
 	Customer(string, string, string, string, string);
 	//non-default constructor
 
+	virtual ~Customer();
+	//destructor
+
 	virtual void Print();
 	//print method
 
