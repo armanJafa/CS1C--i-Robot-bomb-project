@@ -37,6 +37,10 @@ public:
 
 	virtual void Print();
 	//print method
+	
+	friend istream& operator >> (istream& input, Customer &inputCustomer);
+	//Overloaded insertion operator.
+
 
 	//....bunch of getters and setters below this:
 };
