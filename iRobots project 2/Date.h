@@ -79,6 +79,9 @@ ACCESSORS
 	//counts the months to find interests.
 	int CountMonths(Date toDate);
 
+	//Overloaded insertion operator.
+	friend istream& operator >>(istream& input, Date &inputDate);
+
 private:
 	int dateMonth; //IN - month from file
 	int dateDay;   //IN - day from file
