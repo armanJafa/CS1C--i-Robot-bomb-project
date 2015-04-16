@@ -51,3 +51,34 @@ void Customer::Print()
 	}
 
 }
+
+//Overloaded Insertion Operator
+//Used for storing the new customer information.
+istream& operator >>(istream& input, Customer& customerInput)
+{
+	cout << "Enter Company Name: ";
+	getline(input, customerInput.companyName);
+
+	cout << "Enter Street Address: ";
+	getline(input,customerInput.streetAddress);
+
+	cout << "Enter State Address: ";
+	getline(input,customerInput.stateAddress);
+
+	cout << "Enter Customer Rating: ";
+	getline(input, customerInput.customerRating);
+
+	cout << "Enter testimonial: ";
+	getline(input, customerInput.testimonial);
+
+	cout << "Enter amount spent: ";
+	input >> customerInput.amountSpent;
+	input.ignore(1000000, '\n');
+
+	input >> customerInput.pamphletSentDate;
+
+	cout << "Enter Field: ";
+	getline(input, customerInput.field);
+
+	return input;
+}
