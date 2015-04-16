@@ -370,4 +370,17 @@ int Date::CountMonths(Date toDate) // CALC - date of latest transaction
 }
 
 
+istream& operator >>(istream& input, Date& inputDate)
+{
+	cout << "Enter month: ";
+	input >> inputDate.dateMonth;
+	cout << "Enter Day: ";
+	input >> inputDate.dateDay;
+	cout << "Enter Year: ";
+	input >> inputDate.dateYear;
+	input.ignore(10000, '\n');
+
+	return input;
+}
+
 
