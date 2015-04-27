@@ -1,0 +1,18 @@
+
+******************************************************************************************************
+HELP 
+
+Program Operations:
+	- EXIT-closes the program
+	- VIEW PAMPHLET- Displays a digital pamphlet for our product. 
+	- VIEW TESTIMONIALS- Displays testimonials regarding our product. 
+	- ADD TESTIMONIALS- Allows YOU (our beloved customer) to add a testimonial to our system
+	- REQUEST A PAMPHLET-By selecting this option we will send you a physical pamphlet of our product
+					     at no charge to you. 
+	- ORDER ROBOTS-Gives you the option to order one of our robots for your use. 
+	- ADMINISTRATOR OPTIONS-This option is for our network administrator so that we can add customers
+	                        to our system. If you are a customer this won't concern you so DON'T USE 
+	                        IT (or else). 
+
+
+******************************************************************************************************
