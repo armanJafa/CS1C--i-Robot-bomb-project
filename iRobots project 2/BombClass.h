@@ -21,7 +21,8 @@ enum UserChoice
 	ADD_TESTIMONIALS,
 	REQUEST_A_PAMPHLET,
 	ORDER_ROBOTS,
-	ADMIN_OPTIONS
+	ADMIN_OPTIONS,
+	VIEW_HELP
 
 };
 
@@ -54,6 +55,9 @@ public:
 	//displays pamphlet
 
 	bool EnterAdminPassword();
+
+	void DisplayHelpPage();
+	//Displays help menu
 
 private:
 
