@@ -65,6 +65,8 @@ void BombClass::CreateMemberList(ifstream &infile)
 
 		}
 	}
+
+
 }
 
 // main menu for users
@@ -84,11 +86,12 @@ int BombClass::CustomerMenu()
 	cout << setw(58) << "| 4  - REQUEST A PAMPHLET " << '|' << endl;
 	cout << setw(58) << "| 5  - ORDER ROBOTS" << '|' << endl;
 	cout << setw(58) << "| 6  - Administrator Options" << '|' << endl;
+	cout << setw(58) << "| 7  - VIEW HELP PAGE" << '|' << endl;
 	cout << setfill('-') << setw(59) << left << '-' << endl;
 	cout << setfill(' ');
 
 	//calls get and check, which uses try and catch statements
-	tempChoice = GetAndCheckInt(0, 6);
+	tempChoice = GetAndCheckInt(0, 7);
 	return tempChoice;
 
 }
@@ -128,6 +131,25 @@ void BombClass::DisplayMemberList()
 		(*index)->Print();
 		cout << endl;
 	}
+}
+
+//Displays a help menu for the user.
+void BombClass::DisplayHelpPage()
+{
+	ifstream infile;   //file to read
+	string readString; //string to output read characters
+
+	infile.open("Help.txt");
+
+	//reads the whole file
+	while (infile.good())
+	{
+		getline(infile, readString);
+		cout << readString;
+		cout << endl;
+
+	}
+	infile.close();
 }
 
 /*************************************************************************
@@ -302,4 +324,3 @@ bool BombClass:: EnterAdminPassword()
 	return RightPassword;
 
 }
-
