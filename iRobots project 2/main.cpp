@@ -21,6 +21,7 @@ int main()
 {
 
 
+
 	//function call to generate list
 	bombInventory.CreateMemberList(infile);
 
@@ -43,6 +44,11 @@ int main()
 				bombInventory.DisplayPamphlet();
 				break;
 
+			//Displays a help page for the user.
+			case VIEW_HELP:
+				bombInventory.DisplayHelpPage();
+				break;
+
 			//only option avalible for Admin at this time
 			case ADMIN_OPTIONS:
 
@@ -62,4 +68,3 @@ int main()
 
 	return 0;
 }
-
