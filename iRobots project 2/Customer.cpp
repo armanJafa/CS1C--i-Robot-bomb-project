@@ -132,6 +132,12 @@ void Customer::Print()
 
 }
 
+bool Customer::operator >(Customer& otherCustomer)
+//Overloaded greater than operator. Used for sorting.
+{
+	return(companyName > otherCustomer.companyName);
+}
+
 //Overloaded Insertion Operator
 //Used for storing the new customer information.
 istream& operator >>(istream& input, Customer& customerInput)
