@@ -39,6 +39,9 @@ public:
 	virtual void Print();
 	//print method
 	
+	bool operator >(Customer&);
+	//Overloaded greater than operator.
+
 	friend istream& operator >> (istream& input, Customer &inputCustomer);
 	//Overloaded insertion operator.
 
