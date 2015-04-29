@@ -18,12 +18,14 @@ Customer::Customer()
 	customerRating.clear();
 	testimonial.clear();
 	amountSpent = 0.0;
+	pamphletSent.clear();
 	field.clear();
 }
 
 //non-default constructor
 Customer::Customer(string tempCompanyName, string tempStreetAddress,
-	string tempStateAddress, string tempCustomerRating, string tempField)
+		string tempStateAddress, string tempCustomerRating, string tempField,
+		string tempTestimonial, string pamphletSent)
 {
 	//sets all data to the file data
 	this->companyName = tempCompanyName;
@@ -31,8 +33,75 @@ Customer::Customer(string tempCompanyName, string tempStreetAddress,
 	this->stateAddress = tempStateAddress;
 	this->customerRating = tempCustomerRating;
 	this->field = tempField;
+	this->testimonial = tempTestimonial;
+	this->pamphletSent = pamphletSent;
 
 	amountSpent = 0;
+
+}
+
+Customer::Customer(string tempCompanyName, string tempStreetAddress,
+		string tempStateAddress, string tempTestimonial)
+{
+
+	this->companyName = tempCompanyName;
+	this->streetAddress = tempStreetAddress;
+	this->stateAddress = tempStateAddress;
+	this->testimonial = tempTestimonial;
+
+	amountSpent = 0;
+	pamphletSent = "Yes";
+
+}
+
+string Customer::GetTestimonial()
+{
+
+	return testimonial;
+
+}
+string Customer::GetCompanyName()
+{
+	return companyName;
+
+}
+string Customer::GetStreetAddress()
+{
+	return streetAddress;
+}
+
+string Customer::GetStateAddress()
+{
+	return stateAddress;
+}
+
+string Customer::GetCustomerRating()
+{
+	return customerRating;
+}
+
+void Customer::SetTestimonial(string testimonial)
+{
+	this->testimonial = testimonial;
+
+}
+
+string Customer::GetField()
+{
+	return field;
+}
+
+string Customer::GetPamphlet()
+{
+
+	return pamphletSent;
+
+}
+
+void Customer:: SetRevcievedPamphlet(string tempPamphlet)
+{
+
+	this->pamphletSent = tempPamphlet;
 
 }
 
@@ -40,15 +109,26 @@ Customer::Customer(string tempCompanyName, string tempStreetAddress,
 void Customer::Print()
 {
 
-	cout << companyName << endl;
-	cout << streetAddress << endl;
-	cout << stateAddress << endl;
-	cout << customerRating << endl;
+	cout << setw(25) << companyName << setw(26) << streetAddress << setw(24)
+			 << stateAddress << setw(26) << customerRating << setw(24);
+			 cout << pamphletSent << setw(25);
+
+	//cout << companyName << endl;
+	//cout << streetAddress << endl;
+	//cout << stateAddress << endl;
+	//cout << customerRating << endl;
+	//cout << testimonial << endl;
+	//cout << pamphletSent << endl;
+
+
 	if (field != "key")
 	{
+
 		cout << field;
 		cout << endl;
 	}
+
+
 
 }
 
@@ -56,28 +136,13 @@ void Customer::Print()
 //Used for storing the new customer information.
 istream& operator >>(istream& input, Customer& customerInput)
 {
-	cout << "Enter Company Name: ";
-	getline(input, customerInput.companyName);
 
-	cout << "Enter Street Address: ";
-	getline(input,customerInput.streetAddress);
-
-	cout << "Enter State Address: ";
-	getline(input,customerInput.stateAddress);
-
-	cout << "Enter Customer Rating: ";
+	cout << "\n\nEnter a customer rating"
+			"(Interested <very/not so much>:";
 	getline(input, customerInput.customerRating);
+	cout << endl;
 
-	cout << "Enter testimonial: ";
-	getline(input, customerInput.testimonial);
-
-	cout << "Enter amount spent: ";
-	input >> customerInput.amountSpent;
-	input.ignore(1000000, '\n');
-
-	input >> customerInput.pamphletSentDate;
-
-	cout << "Enter Field: ";
+	cout << "Enter Field(nice to have? Not so much?): ";
 	getline(input, customerInput.field);
 
 	return input;

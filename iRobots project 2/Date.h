@@ -24,6 +24,7 @@
 #include <limits>
 #include <vector>
 #include <iterator>
+#include <stdio.h>
 using namespace std;
 
 

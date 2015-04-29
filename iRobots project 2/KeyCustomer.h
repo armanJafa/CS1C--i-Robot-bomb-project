@@ -20,11 +20,15 @@ public:
 	KeyCustomer();
 	//default constructor
 
-	KeyCustomer(string, string, string, string, string);
+	KeyCustomer(string, string, string, string, string, string, string);
 	//non-default constructor
 
 	virtual void Print();
 	//virtual print method
+
+	virtual string GetField();
+
+
 
 private:
 

@@ -30,7 +30,8 @@ enum UserChoice
 enum AdminChoice
 {
 	ADMIN_MENU_EXIT,
-	VIEW_LIST
+	VIEW_LIST,
+	ADD_MEMBERS
 
 };
 
@@ -54,15 +55,31 @@ public:
 	void DisplayPamphlet();
 	//displays pamphlet
 
+	void ViewTestimonials();
+	//views the current testimonials
+
+	void WriteTestimonials();
+
+	int SearchCompanyName(string);
+	//search company name in order to write a tesimonial
+
 	bool EnterAdminPassword();
 
 	void DisplayHelpPage();
 	//Displays help menu
+	void SaveBetweenExecutions();
+
+	void RequestAPamphlet(ofstream&);
+
+
 
 private:
 
 	vector<Customer*> list; //list of customer pointers
 	//without pointer, only stores copies
+
+	bool NeedToAddMembers;
+
 
 	int GetAndCheckInt(int int1, //IN -  lowest allowable parameter for
 								 //      correct values that need to be
@@ -74,8 +91,13 @@ private:
 	int AdminMenu();
 	//helper function, can be viewd within AdministrationPage() only
 
-	void DisplayMemberList();
+
 	//helper function, can be viewd within AdministrationPage() only
+	void DisplayMemberList();
+	void AddMembers();
+	void DisplayNewMembers();
+	char GetAndCheck(char val1, char val2);
+	void SendPamphletToListCustomers();
 };
 
 #endif /* BOMBCLASS_H_ */

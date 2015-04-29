@@ -24,7 +24,7 @@ private:
 	string customerRating;
 	string testimonial;
 	float amountSpent;
-	Date pamphletSentDate;
+	string pamphletSent;
 	string field;
 
 public:
@@ -32,8 +32,9 @@ public:
 	Customer();
 	//default constructor
 
-	Customer(string, string, string, string, string);
+	Customer(string, string, string, string, string, string, string);
 	//non-default constructor
+	Customer(string, string, string, string);
 
 	virtual void Print();
 	//print method
@@ -43,6 +44,15 @@ public:
 
 
 	//....bunch of getters and setters below this:
+	string GetTestimonial();
+	string GetCompanyName();
+	string GetStreetAddress();
+	string GetStateAddress();
+	string GetCustomerRating();
+	string GetPamphlet();
+	virtual string GetField();
+	void SetTestimonial(string);
+	void SetRevcievedPamphlet(string);
 };
 
 #endif /* CUSTOMER_H_ */

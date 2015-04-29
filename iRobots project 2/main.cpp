@@ -13,6 +13,7 @@ namespace AustinsNameSpace
 	int choice = 0;
 	ifstream infile;
 	BombClass bombInventory;
+	ofstream outfile;
 }
 
 using namespace AustinsNameSpace;
@@ -44,6 +45,23 @@ int main()
 				bombInventory.DisplayPamphlet();
 				break;
 
+			case VIEW_TESTIMONIALS:
+				bombInventory.ViewTestimonials();
+				break;
+
+			case ADD_TESTIMONIALS:
+				bombInventory.WriteTestimonials();
+				break;
+
+			case REQUEST_A_PAMPHLET:
+
+				bombInventory.RequestAPamphlet(outfile);
+				break;
+
+			case ORDER_ROBOTS:
+				cout << "\n\n Not done yet!\n\n";
+				break;
+
 			//Displays a help page for the user.
 			case VIEW_HELP:
 				bombInventory.DisplayHelpPage();
@@ -61,6 +79,8 @@ int main()
 				break;
 
 			}
+
+			bombInventory.SaveBetweenExecutions();
 		}
 
 	} while (choice != EXIT);

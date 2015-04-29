@@ -17,18 +17,26 @@ KeyCustomer::KeyCustomer()
 
 }
 
+
 //non-default constructor
 KeyCustomer::KeyCustomer(string tempCompanyName, string tempStreetAddress,
-	string tempStateAddress, string tempCustomerRating, string tempField)
+	string tempStateAddress, string tempCustomerRating, string tempField,string tempTestimonial, string pamphletSent)
 
 //calls the base constructor
 :Customer(tempCompanyName, tempStreetAddress,
-		 tempStateAddress,tempCustomerRating,tempField)
+		 tempStateAddress,tempCustomerRating,tempField,tempTestimonial,pamphletSent)
 {
 	//sets private data field
 	this->keyField = tempField;
 
 }
+
+string KeyCustomer:: GetField()
+{
+
+	return keyField;
+}
+
 
 //virtual method to print extra field in derived class
 void KeyCustomer::Print()
@@ -41,4 +49,6 @@ void KeyCustomer::Print()
 
 
 }
+
+
 
