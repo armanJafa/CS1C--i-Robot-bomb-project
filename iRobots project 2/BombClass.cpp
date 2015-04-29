@@ -10,7 +10,7 @@
 #include "BombClass.h"
 #include "KeyCustomer.h"
 #include "Customer.h"
-
+#include <algorithm>
 //default constructor
 BombClass::BombClass()
 {
@@ -152,6 +152,8 @@ void BombClass::DisplayMemberList()
 
 	//iterator to output objects data
 	vector<Customer*>::iterator index;
+
+	sort(list.begin(), list.end());
 
 	//using methods for loop initalizations
 	for (index = list.begin(); index != list.end(); index++)
