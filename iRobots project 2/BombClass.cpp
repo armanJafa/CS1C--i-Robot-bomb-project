@@ -166,6 +166,47 @@ void BombClass::DisplayMemberList()
 	cout << endl << endl;
 }
 
+void BombClass::DisplayKeyMemberList()
+{
+	cout << "\n\nINFORMATION: \n\n";
+
+	cout << left;
+
+	/**
+	 * << setw(25) << "STREET ADDRESS" << setw(20)
+	 << "STATE ADDRESS" << setw(20) << "RATING" << setw(20) << "RECIEVED PAMPHLET"
+	 << setw(20) << "KEY" << setw(20) << endl;
+	 */
+
+	cout << setw(25) << "COMPANY" << setw(26) << "STREET ADDRESS" << setw(24)
+			<< "STATE ADDRESS" << setw(26) << "RATING" << setw(24)
+			<< "RECIEVED PAMPHLET" << setw(25) << "KEY" << endl;
+
+	cout << setfill('-') << '-';
+
+	cout << setw(23) << '-' << " " << setw(24) << '-' << "  " << setw(23) << '-'
+			<< " " << setw(24) << '-' << "  " << setw(23) << '-' << " "
+			<< setw(15) << '-' << "  " << endl;
+
+	cout << setfill(' ');
+
+	//iterator to output objects data
+	vector<Customer*>::iterator index;
+
+	sort(list.begin(), list.end());
+
+	//using methods for loop initalizations
+	for (index = list.begin(); index != list.end(); index++)
+	{
+
+		(*index)->PrintKeyCustomer();
+		cout << endl;
+	}
+
+	cout << endl << endl;
+
+}
+
 void BombClass::RequestAPamphlet(ofstream &outfile)
 {
 
