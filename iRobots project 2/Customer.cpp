@@ -132,6 +132,21 @@ void Customer::Print()
 
 }
 
+void Customer::PrintKeyCustomer()
+{
+
+	if(field=="key")
+	{
+		cout << setw(25) << companyName << setw(26) << streetAddress
+			 << setw(24) << stateAddress << setw(26) << customerRating
+			 << setw(24);
+		cout << pamphletSent << setw(25);
+		cout << field;
+		cout << endl;
+
+	}
+}
+
 bool Customer::operator >(Customer& otherCustomer)
 //Overloaded greater than operator. Used for sorting.
 {
