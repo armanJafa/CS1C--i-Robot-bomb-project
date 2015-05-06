@@ -39,6 +39,9 @@ public:
 	virtual void Print();
 	//print method
 	
+	void PrintKeyCustomer();
+	//Prints only the key customer.
+	
 	bool operator >(Customer&);
 	//Overloaded greater than operator.
 
