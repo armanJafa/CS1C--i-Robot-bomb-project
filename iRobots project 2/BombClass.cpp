@@ -776,3 +776,400 @@ bool BombClass::EnterAdminPassword()
 	return RightPassword;
 
 }
+
+void BombClass::DisplayKeyCustomers()
+{
+	cout << "\n\nINFORMATION: \n\n";
+
+	cout << left;
+
+	/**
+	 * << setw(25) << "STREET ADDRESS" << setw(20)
+	 << "STATE ADDRESS" << setw(20) << "RATING" << setw(20) << "RECIEVED PAMPHLET"
+	 << setw(20) << "KEY" << setw(20) << endl;
+	 */
+
+	cout << setw(25) << "COMPANY" << setw(26) << "STREET ADDRESS" << setw(24)
+			<< "STATE ADDRESS" << setw(26) << "RATING" << setw(24)
+			<< "RECIEVED PAMPHLET" << setw(25) << "KEY" << endl;
+
+	cout << setfill('-') << '-';
+
+	cout << setw(23) << '-' << " " << setw(24) << '-' << "  " << setw(23) << '-'
+			<< " " << setw(24) << '-' << "  " << setw(23) << '-' << " "
+			<< setw(15) << '-' << "  " << endl;
+
+	cout << setfill(' ');
+
+	//iterator to output objects data
+	vector<Customer*>::iterator index;
+
+	sort(list.begin(), list.end());
+
+	//using methods for loop initalizations
+	for (index = list.begin(); index != list.end(); index++)
+	{
+		if ((*index)->GetField() == "key")
+		{
+			//will call virtual function to print
+			(*index)->Print();
+			cout << endl;
+		}
+	}
+
+	cout << endl << endl;
+}
+
+int BombClass::PurchaseMenu()
+{
+	int tempChoice = -1; // choice by user input
+
+	cout << setfill('-') << setw(59) << left << '-' << endl;
+	cout << setfill(' ');
+	cout << setw(58) << "|  I-ROBOT PURCHASE MENU" << '|' << endl;
+	cout << setw(58) << '|' << '|' << endl;
+	cout << setw(58) << "| 0  - EXIT" << '|' << endl;
+	cout << setw(58) << "| 1  - BUY BASIC i-Robot" << '|' << endl;
+	cout << setw(58) << "| 2  - BUY Bomb Destroyer" << '|' << endl;
+	cout << setw(58) << "| 3  - BUY Ultra-Bot" << '|' << endl;
+	cout << setfill('-') << setw(59) << left << '-' << endl;
+	cout << setfill(' ');
+
+	tempChoice = GetAndCheckInt(0, 3);
+	return tempChoice;
+}
+
+void BombClass::Purchase(ofstream &outfile)
+{
+	//VARIABLE DECLARATIONS
+	int choice;				//IN & OUT  - The user's menu selection
+	int quantity;			//IN & CALC - The purchase quantity
+	char answer;			//IN & OUT  - User's answer to purchase more
+	saleNode *newNode;		//CALC 	    - A new purchase node
+	saleNode *head;			//CALC		- head to the list
+	saleNode *tail;			//CALC 		- tail of the list
+	saleNode *tempPtr;		//CALC		- pointer to traverse the list
+	bool exit;				//CALC		- T/F to exit menu
+
+	//VARIABLE INITIALIZATIONS
+	choice     = 0;
+	quantity   = 0;
+	head	   = NULL;
+	tail	   = NULL;
+	tempPtr    = head;
+	exit 	   = false;
+	answer	   = 1;
+
+	//PROCESSING - DO-WHILE - Used to output the menu and process the
+	//			   purchases. Exits once the user chooses to not add any
+	//			   other robots
+	do
+	{
+		//PurchaseMenu - displays the purchases menu
+		choice = PurchaseMenu();
+
+		//PROCESSING - SWITCH - Used to branch out into the different
+		//			   robot options
+		switch (choice)
+		{
+			case SALE_EXIT:	//Exits the switch
+							exit = true;
+							break;
+			case BASIC:		//Purchases a basic robot
+							//INPUT - Prompts user for quantity to buy
+							cout << "How many would you like to buy? ";
+							cin  >> quantity;
+
+							//Creates new node and adds data
+							newNode = new saleNode;
+							newNode->next = NULL;
+							newNode->robot = "Basic i-Robot";
+							newNode->price = 20000;
+							newNode->qty = quantity;
+
+							//PROCESSING - IF-THEN-ELSE - Used to check
+							//if the list is empty and add the node
+							if(head == NULL)
+							{
+								 head = newNode;
+								 tail = newNode;
+							}
+							else
+							{
+								tempPtr = head;
+								while(tempPtr->next != NULL)
+								{
+									tempPtr = tempPtr->next;
+								}
+								tempPtr->next = newNode;
+								tail = newNode;
+							}
+
+							//INPUT - Prompts user to buy more
+							do
+							{
+								cout << "Would you like to buy more? ";
+								answer = GetAndCheck('Y', 'N');
+							}
+							while(answer == 1);
+
+							//PROCESSING - IF-THEN - Used to check if
+							//answers is N to checkout and exit
+							if(answer == 'N')
+							{
+								CheckOut(head, outfile);
+								exit = true;
+							}
+							break;
+			case DESTROYER:	//Purchases a Bomb Destroyer Robot
+							//INPUT - Prompts user for quantity to buy
+							cout << "How many would you like to buy? ";
+							cin  >> quantity;
+							newNode = new saleNode;
+							newNode->next = NULL;
+							newNode->robot = "Bomb Destroyer";
+							newNode->price = 35000;
+							newNode->qty = quantity;
+
+							//PROCESSING - IF-THEN-ELSE - Used to check
+							//if the list is empty and add the node
+							if(head == NULL)
+							{
+								 head = newNode;
+								 tail = newNode;
+							}
+							else
+							{
+								tempPtr = head;
+								while(tempPtr->next != NULL)
+								{
+									tempPtr = tempPtr->next;
+								}
+								tempPtr->next = newNode;
+								tail = newNode;
+							}
+
+							//INPUT - Prompts user to buy more
+							do
+							{
+								cout << "Would you like to buy more? ";
+								answer = GetAndCheck('Y', 'N');
+							}
+							while(answer == 1);
+
+							//PROCESSING - IF-THEN - Used to check if
+							//answers is N to checkout and exit
+							if(answer == 'N')
+							{
+								CheckOut(head, outfile);
+								exit = true;
+							}
+							break;
+
+			case ULTRA_BOT:	//Purchases an Ultra-Bot robot
+							//INPUT - Prompts user for quantity to buy
+							cout << "How many would you like to buy? ";
+							cin  >> quantity;
+							newNode = new saleNode;
+							newNode->next = NULL;
+							newNode->robot = "Ultra-Bot";
+							newNode->price = 99999;
+							newNode->qty = quantity;
+
+							//PROCESSING - IF-THEN-ELSE - Used to check
+							//if the list is empty and add the node
+							if(head == NULL)
+							{
+								 head = newNode;
+								 tail = newNode;
+							}
+							else
+							{
+								tempPtr = head;
+								while(tempPtr->next != NULL)
+								{
+									tempPtr = tempPtr->next;
+								}
+								tempPtr->next = newNode;
+								tail = newNode;
+							}
+
+							//INPUT - Prompts user to buy more
+							do
+							{
+								cout << "Would you like to buy more? ";
+								answer = GetAndCheck('Y', 'N');
+							}
+							while(answer == 1);
+
+							//PROCESSING - IF-THEN - Used to check if
+							//answers is N to checkout and exit
+							if(answer == 'N')
+							{
+								CheckOut(head, outfile);
+								exit = true;
+							}
+							break;
+		}
+	}while(!exit);
+}
+
+void BombClass::CheckOut(saleNode *head, ofstream &outfile)
+{
+	float subTotal;
+	float total;
+	float tax;
+	char data;
+	int searchReturn = -1;
+	string tempCompanyName;
+	string tempStreetAddress;
+	string tempStateAddress;
+	string tempTestimonial;
+	saleNode *tempPtr;
+
+	subTotal = 0;
+	total	 = 0;
+	tax		 = 0;
+
+
+	outfile.open("CustomersToAdd.txt", std::fstream::app);
+
+	//PROCESSING - DO-WHILE - Used to ask the user if they're on the list
+	do
+	{
+		cout << "\nAre you already a customer on our list?: ";
+		data = GetAndCheck('Y', 'N');
+	}while (data == 1);
+
+	//PROCESSING - IF-THEN-ELSE - If user is not on the list their info
+	//			   is requested
+	if (data == 'N')
+	{
+		//INPUT - Prompts the user for their information
+		cout << "\nEnter your data to proceed with purchase:\n\n";
+
+		cout << "Company Name: ";
+		getline(cin, tempCompanyName);
+		cout << endl;
+
+		cout << "Company Street Address: ";
+		getline(cin, tempStreetAddress);
+		cout << endl;
+
+		cout << "Company State Address: ";
+		getline(cin, tempStateAddress);
+		cout << endl;
+
+		tempTestimonial = "none";
+
+		//OUTPUT - Writes the customer's information to file
+		outfile << tempCompanyName << endl;
+		outfile << tempStreetAddress << endl;
+		outfile << tempStateAddress << endl;
+		outfile << tempTestimonial << endl;
+
+		//OUTPUT - Prints receipt
+		cout << "-------------------------------------" << endl
+			 << right << setw(22) << "I-ROBOT" << endl
+			 << setw(25) << "SALES RECEIPT" << endl
+			 << "-------------------------------------" << endl
+			 << left << setw(9) << "Name: " << tempCompanyName << endl
+			 << setw(9) << "Address: " << tempStreetAddress << endl
+			 << setw(9) << " " << tempStateAddress << endl
+			 << "-------------------------------------" << endl;
+
+		tempPtr = head;
+
+		//PROCESSING - WHILE - Used to traverse the list and print the
+		//			   items purchased
+		while(tempPtr != NULL)
+		{
+			cout << left << setw(24) << tempPtr->robot << " $"
+				 << fixed << setprecision(2) << right << setw(11)
+				 << tempPtr->price * tempPtr->qty  <<  endl
+				 << tempPtr->qty << " @ $" << tempPtr->price
+				 << endl << endl;
+			subTotal = subTotal + (tempPtr->price * tempPtr->qty);
+
+			tempPtr = tempPtr->next;
+		}
+
+		//PROCESSING - Calculates tax and grand total
+		tax = (subTotal * CA_TAX)/100;
+		total = subTotal + tax;
+
+		//OUTPUT - Prints the last part of the receipt
+		cout << "-------------------------------------" << endl << left
+			 << setw(25) << "SUBTOTAL" << "$" << right << setw(11)
+			 << subTotal << endl << "Tax CA %" << left << setw(17)
+			 << CA_TAX << "$" << right << setw(11) << tax << endl << left
+			 << setw(25) << "TOTAL" << "$" << right << setw(11) << total
+			 << endl << "-------------------------------------" << endl
+			 << setw(32) << "Thank you for your purchase" << endl
+			 << setw(28) << "Tip the programmer!" << endl << endl;
+
+		NeedToAddMembers = true;
+	}
+	else
+	{
+		do
+		{
+			cout << endl;
+			cout << "Company Name: ";
+			getline(cin, tempCompanyName);
+			cout << endl;
+			searchReturn = SearchCompanyName(tempCompanyName);
+			if(searchReturn == -1)
+			{
+				cout << "\n\nCompany is not in our system!\n\n";
+			}
+		}while(searchReturn == -1);
+
+		if(searchReturn != -1)
+		{
+			cout << tempCompanyName << " found!\n\n";
+
+			list[searchReturn]->SetRevcievedPamphlet("Yes");
+
+			cout << "-------------------------------------" << endl
+				 << right << setw(22) << "I-ROBOT" << endl
+				 << setw(25) << "SALES RECEIPT" << endl
+				 << "-------------------------------------" << endl
+				 << left << setw(9) << "Name: "
+				 << list[searchReturn]->GetCompanyName() << endl
+				 << setw(9) << "Address: "
+				 << list[searchReturn]->GetStreetAddress() << endl
+				 << setw(9) << " " << list[searchReturn]->GetStateAddress()
+				 << endl << "-------------------------------------" << endl;
+
+			tempPtr = head;
+
+			while(tempPtr != NULL)
+			{
+				cout << left << setw(24) << tempPtr->robot << " $"
+					 << fixed << setprecision(2) << right << setw(11)
+					 << tempPtr->price * tempPtr->qty  <<  endl
+					 << tempPtr->qty << " @ $" << tempPtr->price
+					 << endl << endl;
+				subTotal = subTotal + (tempPtr->price * tempPtr->qty);
+				tempPtr = tempPtr->next;
+			}
+
+			tax = (subTotal * CA_TAX)/100;
+			total = subTotal + tax;
+
+			cout << "-------------------------------------" << endl << left
+				 << setw(25) << "SUBTOTAL" << "$" << right << setw(11)
+				 << subTotal << endl << "Tax CA %" << left << setw(17)
+				 << CA_TAX << "$" << right << setw(11) << tax << endl
+				 << left << setw(25) << "TOTAL" << "$" << right << setw(11)
+				 << total << endl << "-------------------------------------"
+				 << endl << setw(32) << "Thank you for your purchase"
+				 << endl << setw(36) << "Your robot(s) will ship in 5-7 days"
+				 << endl << endl;
+		}
+	}
+
+	outfile.close();
+	outfile.clear();
+}
