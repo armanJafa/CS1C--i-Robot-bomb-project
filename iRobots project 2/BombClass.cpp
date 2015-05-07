@@ -577,10 +577,11 @@ int BombClass::AdminMenu()
 	cout << setw(58) << "| 0  - EXIT" << '|' << endl;
 	cout << setw(58) << "| 1  - VIEW LIST" << '|' << endl;
 	cout << setw(58) << "| 2  - ADD MEMBER" << '|' << endl;
+	cout << setw(58) << "| 3  - VIEW KEY MEMBERS" << '|' << endl;
 	cout << setfill('-') << setw(59) << left << '-' << endl;
 	cout << setfill(' ');
 
-	tempChoice = GetAndCheckInt(0, 2);
+	tempChoice = GetAndCheckInt(0, 3);
 	return tempChoice;
 
 }
@@ -616,6 +617,10 @@ void BombClass::AdministrationPage()
 			case ADD_MEMBERS:
 				AddMembers();
 				break;
+				
+			case VIEW_KEY_LIST:
+			DisplayKeyCustomers();
+			break;
 
 			}
 		}
