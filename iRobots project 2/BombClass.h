@@ -23,7 +23,6 @@ enum UserChoice
 	ORDER_ROBOTS,
 	ADMIN_OPTIONS,
 	VIEW_HELP
-
 };
 
 //used for admin menu
@@ -31,9 +30,31 @@ enum AdminChoice
 {
 	ADMIN_MENU_EXIT,
 	VIEW_LIST,
-	ADD_MEMBERS
-
+	ADD_MEMBERS,
+	VIEW_KEY_LIST
 };
+
+//used for purchase menu
+enum RobotChoice
+{
+	SALE_EXIT,
+	BASIC,
+	DESTROYER,
+	ULTRA_BOT,
+};
+
+//used for purchase list
+struct saleNode
+{
+	string 	  robot;
+	float	  price;
+	int	   	  qty;
+	saleNode *next;
+};
+
+//const for california sales tax
+const float CA_TAX = 8.25;
+
 
 //main container for whole project
 class BombClass
@@ -71,6 +92,14 @@ public:
 
 	void RequestAPamphlet(ofstream&);
 
+	void DisplayKeyCustomers();
+
+	int PurchaseMenu();
+
+	void Purchase(ofstream &outfile);
+
+	void CheckOut(saleNode *head, ofstream &outfile);
+
 
 
 private:
@@ -94,7 +123,6 @@ private:
 
 	//helper function, can be viewd within AdministrationPage() only
 	void DisplayMemberList();
-	void DisplayKeyMemberList();
 	void AddMembers();
 	void DisplayNewMembers();
 	char GetAndCheck(char val1, char val2);
@@ -102,3 +130,4 @@ private:
 };
 
 #endif /* BOMBCLASS_H_ */
+
