@@ -123,6 +123,7 @@ private:
 
 	//helper function, can be viewd within AdministrationPage() only
 	void DisplayMemberList();
+	void DisplayKeyMemberList();
 	void AddMembers();
 	void DisplayNewMembers();
 	char GetAndCheck(char val1, char val2);
