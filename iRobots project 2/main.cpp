@@ -59,7 +59,7 @@ int main()
 				break;
 
 			case ORDER_ROBOTS:
-				cout << "\n\n Not done yet!\n\n";
+				bombInventory.Purchase(outfile);
 				break;
 
 			//Displays a help page for the user.
