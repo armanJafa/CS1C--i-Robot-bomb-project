@@ -11,15 +11,29 @@
 #include "KeyCustomer.h"
 #include "Customer.h"
 #include <algorithm>
-//default constructor
+
+/*************************************************************************
+ *
+ * FUNCTION BombClass
+ *________________________________________________________________________
+ * This function will set all values to initial values
+ *________________________________________________________________________
+ ************************************************************************/
 BombClass::BombClass()
 {
 
+	//set values
 	NeedToAddMembers = false;
 
 }
 
-//creating the member list using vectors
+/*************************************************************************
+ *
+ * FUNCTION CreateMemberList
+ *________________________________________________________________________
+ * This function creates the member list
+ *________________________________________________________________________
+ ************************************************************************/
 void BombClass::CreateMemberList(ifstream &infile)
 {
 
@@ -55,9 +69,10 @@ void BombClass::CreateMemberList(ifstream &infile)
 		if (tempField == "key")
 		{
 			//overloaded constructor for key Customers
-			tempKeyList = new KeyCustomer(tempCompanyName, tempStreetAddress,
-					tempStateAddress, tempCustomerRating, tempField,
-					tempTestimonial, recievedPamphlet);
+			tempKeyList = new KeyCustomer(tempCompanyName,
+					tempStreetAddress,tempStateAddress,
+					tempCustomerRating, tempField,tempTestimonial,
+					recievedPamphlet);
 
 			//push object on the vector
 			list.push_back(tempKeyList);
@@ -78,7 +93,13 @@ void BombClass::CreateMemberList(ifstream &infile)
 	infile.clear();
 }
 
-// main menu for users
+/*************************************************************************
+ *
+ * FUNCTION CustomerMenu
+ *________________________________________________________________________
+ * This function displays main menu for users
+ *________________________________________________________________________
+ ************************************************************************/
 int BombClass::CustomerMenu()
 {
 	int tempChoice = -1; // choice by user input
@@ -105,7 +126,13 @@ int BombClass::CustomerMenu()
 
 }
 
-//displays the pamphlet from file
+/*************************************************************************
+ *
+ * FUNCTION DisplayPamphlet
+ *________________________________________________________________________
+ * This function displays the pamphlet
+ *________________________________________________________________________
+ ************************************************************************/
 void BombClass::DisplayPamphlet()
 {
 	ifstream infile;   //file to read
@@ -125,35 +152,51 @@ void BombClass::DisplayPamphlet()
 	infile.clear();
 }
 
-//displays the objects using iterator
+/*************************************************************************
+ *
+ * FUNCTION DisplayMemberList
+ *________________________________________________________________________
+ * This function displays the member list
+ *________________________________________________________________________
+ ************************************************************************/
 void BombClass::DisplayMemberList()
 {
 	cout << "\n\nINFORMATION: \n\n";
 
+	Customer * tempItem = NULL;  // temp item for sort
+
 	cout << left;
 
-	/**
-	 * << setw(25) << "STREET ADDRESS" << setw(20)
-	 << "STATE ADDRESS" << setw(20) << "RATING" << setw(20) << "RECIEVED PAMPHLET"
-	 << setw(20) << "KEY" << setw(20) << endl;
-	 */
+	//bubble sort
+	for (unsigned int i = 0; i < list.size(); i++)
+	{
+		for (unsigned int j = 0; j < list.size(); j++)
+		{
+			if (list[i]->GetCompanyName() < list[j]->GetCompanyName())
+			{
+				tempItem = list[i];
+				list[i] = list[j];
+				list[j] = tempItem;
+			}
+		}
+	}
 
-	cout << setw(25) << "COMPANY" << setw(26) << "STREET ADDRESS" << setw(24)
-			<< "STATE ADDRESS" << setw(26) << "RATING" << setw(24)
+	//outputs the header
+	cout << setw(25) << "COMPANY" << setw(26) << "STREET ADDRESS"
+			<< setw(24) << "STATE ADDRESS" << setw(26)
+			<< "RATING" << setw(24)
 			<< "RECIEVED PAMPHLET" << setw(25) << "KEY" << endl;
 
 	cout << setfill('-') << '-';
 
-	cout << setw(23) << '-' << " " << setw(24) << '-' << "  " << setw(23) << '-'
-			<< " " << setw(24) << '-' << "  " << setw(23) << '-' << " "
-			<< setw(15) << '-' << "  " << endl;
+	cout << setw(23) << '-' << " " << setw(24) << '-' << "  " << setw(23)
+			<< '-'<< " " << setw(24) << '-' << "  " << setw(23) << '-'
+			<< " " << setw(15) << '-' << "  " << endl;
 
 	cout << setfill(' ');
 
 	//iterator to output objects data
 	vector<Customer*>::iterator index;
-
-	sort(list.begin(), list.end());
 
 	//using methods for loop initalizations
 	for (index = list.begin(); index != list.end(); index++)
@@ -166,27 +209,47 @@ void BombClass::DisplayMemberList()
 	cout << endl << endl;
 }
 
+/*************************************************************************
+ *
+ * FUNCTION DisplayKeyMemberList
+ *________________________________________________________________________
+ * This function displays the key members
+ *________________________________________________________________________
+ ************************************************************************/
 void BombClass::DisplayKeyMemberList()
 {
 	cout << "\n\nINFORMATION: \n\n";
 
+		Customer * tempItem = NULL;  // temp item for sort
+
+		cout << left;
+
+		//bubble sort
+		for (unsigned int i = 0; i < list.size(); i++)
+		{
+			for (unsigned int j = 0; j < list.size(); j++)
+			{
+				if (list[i]->GetCompanyName() < list[j]->GetCompanyName())
+				{
+					tempItem = list[i];
+					list[i] = list[j];
+					list[j] = tempItem;
+				}
+			}
+		}
+
 	cout << left;
 
-	/**
-	 * << setw(25) << "STREET ADDRESS" << setw(20)
-	 << "STATE ADDRESS" << setw(20) << "RATING" << setw(20) << "RECIEVED PAMPHLET"
-	 << setw(20) << "KEY" << setw(20) << endl;
-	 */
-
-	cout << setw(25) << "COMPANY" << setw(26) << "STREET ADDRESS" << setw(24)
-			<< "STATE ADDRESS" << setw(26) << "RATING" << setw(24)
-			<< "RECIEVED PAMPHLET" << setw(25) << "KEY" << endl;
+	//output headers
+	cout << setw(25) << "COMPANY" << setw(26) << "STREET ADDRESS"
+		 << setw(24)<< "STATE ADDRESS" << setw(26) << "RATING"
+		 << setw(24)<< "RECIEVED PAMPHLET" << setw(25) << "KEY" << endl;
 
 	cout << setfill('-') << '-';
 
-	cout << setw(23) << '-' << " " << setw(24) << '-' << "  " << setw(23) << '-'
-			<< " " << setw(24) << '-' << "  " << setw(23) << '-' << " "
-			<< setw(15) << '-' << "  " << endl;
+	cout << setw(23) << '-' << " " << setw(24) << '-' << "  " << setw(23)
+		 << '-' << " " << setw(24) << '-' << "  " << setw(23) << '-' << " "
+		 << setw(15) << '-' << "  " << endl;
 
 	cout << setfill(' ');
 
@@ -207,34 +270,45 @@ void BombClass::DisplayKeyMemberList()
 
 }
 
-void BombClass::RequestAPamphlet(ofstream &outfile)
+/*************************************************************************
+ *
+ * FUNCTION RequestAPamphlet
+ *________________________________________________________________________
+ * This function requests a pamphlet
+ *________________________________________________________________________
+ ************************************************************************/
+void BombClass::RequestAPamphlet(ofstream &outfile) // output file
 {
 
-	char data;
-	int searchReturn = -1;
-	string tempCompanyName;
-	string tempStreetAddress;
-	string tempStateAddress;
-	string tempTestimonial;
+	char data;                //data entered
+	int searchReturn = -1;    // search companies
+	string tempCompanyName;   // temp name
+	string tempStreetAddress; // street address
+	string tempStateAddress;  // state address
+	string tempTestimonial;   // testimonials
 
+	//appends the file
 	outfile.open("CustomersToAdd.txt", std::fstream::app);
 
+	//adds data to the outpf file
 	cin.ignore(1000, '\n');
 	do
 	{
+		//output
 		cout << "\nAre you already a customer on our list?: ";
 		data = GetAndCheck('Y', 'N');
 	} while (data == 1);
 
 	if (data == 'N')
 	{
-		//cin.ignore(1000, '\n');
+		//output
 		cout << "\nEnter your data to revieve a pamphlet :\n\n";
 
 		cout << "Company Name: ";
 		getline(cin, tempCompanyName);
 		cout << endl;
 
+		//output
 		cout << "Company Street Address: ";
 		getline(cin, tempStreetAddress);
 		cout << endl;
@@ -245,17 +319,20 @@ void BombClass::RequestAPamphlet(ofstream &outfile)
 
 		tempTestimonial = "none";
 
+		//output
 		outfile << tempCompanyName << endl;
 		outfile << tempStreetAddress << endl;
 		outfile << tempStateAddress << endl;
 		outfile << tempTestimonial << endl;
 
+		//output
 		cout << "Thank you for requesting a pamphlet!" << endl
 				<< "A member of our administrative team will approve your"
 						" information in 1-3 buisness days!\n\n";
 
 		NeedToAddMembers = true;
-	} else
+	}
+	else
 	{
 
 		cout << endl;
@@ -266,11 +343,9 @@ void BombClass::RequestAPamphlet(ofstream &outfile)
 		if (searchReturn != -1)
 		{
 			cout << "Okay, " << tempCompanyName
-					<< " sending a pamphlet\n\n";
+				 << " sending a pamphlet\n\n";
 
 			list[searchReturn]->SetRevcievedPamphlet("Yes");
-
-
 
 		} else
 		{
@@ -279,10 +354,18 @@ void BombClass::RequestAPamphlet(ofstream &outfile)
 
 	}
 
+	//closes and clears the files
 	outfile.close();
 	outfile.clear();
 }
 
+/*************************************************************************
+ *
+ * FUNCTION ViewTestimonials
+ *________________________________________________________________________
+ * This function views testimonials
+ *________________________________________________________________________
+ ************************************************************************/
 void BombClass::ViewTestimonials()
 {
 
@@ -304,6 +387,13 @@ void BombClass::ViewTestimonials()
 
 }
 
+/*************************************************************************
+ *
+ * FUNCTION WriteTestimonials
+ *________________________________________________________________________
+ * This function allows a customer to write testimonials
+ *________________________________________________________________________
+ ************************************************************************/
 void BombClass::WriteTestimonials()
 {
 
@@ -315,8 +405,10 @@ void BombClass::WriteTestimonials()
 	cout << "\nEnter your company name: ";
 	getline(cin, searchName);
 
+	//finds index of company
 	index = SearchCompanyName(searchName);
 
+	//will add testimonial
 	if (index != -1)
 	{
 		cout << "Okay " << list[index]->GetCompanyName()
@@ -333,6 +425,13 @@ void BombClass::WriteTestimonials()
 	cout << endl;
 }
 
+/*************************************************************************
+ *
+ * FUNCTION SearchCompanyName
+ *________________________________________________________________________
+ * This function allows a company to be searched for
+ *________________________________________________________________________
+ ************************************************************************/
 int BombClass::SearchCompanyName(string searchName)
 {
 
@@ -357,7 +456,13 @@ int BombClass::SearchCompanyName(string searchName)
 	return -1;
 }
 
-//Displays a help menu for the user.
+/*************************************************************************
+ *
+ * FUNCTION DisplayHelpPage
+ *________________________________________________________________________
+ * This function allows a company to find help
+ *________________________________________________________________________
+ ************************************************************************/
 void BombClass::DisplayHelpPage()
 {
 	ifstream infile;   //file to read
@@ -377,6 +482,13 @@ void BombClass::DisplayHelpPage()
 	infile.clear();
 }
 
+/*************************************************************************
+ *
+ * FUNCTION SaveBetweenExecutions
+ *________________________________________________________________________
+ * This function saves between executions
+ *________________________________________________________________________
+ ************************************************************************/
 void BombClass::SaveBetweenExecutions()
 {
 	ofstream outputfile;
@@ -430,9 +542,9 @@ int BombClass::GetAndCheckInt(int int1, //IN -  lowest allowable parameter
 										//      for correct values that
 										//      need to be error checked.
 		int int2) 	//IN -  highest allowable
-//      parameter for correct
-//      values that need to be
-//      error checked.
+					//      parameter for correct
+					//      values that need to be
+					//      error checked.
 {
 
 	//default class for throws
@@ -480,8 +592,8 @@ int BombClass::GetAndCheckInt(int int1, //IN -  lowest allowable parameter
 	{
 
 		cout << endl;
-		cout << "**** Please input a NUMBER between " << int1 << " and " << int2
-				<< "       ****";
+		cout << "**** Please input a NUMBER between " << int1
+			 << " and " << int2 << "       ****";
 		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		cout << endl << endl;
@@ -578,16 +690,23 @@ int BombClass::AdminMenu()
 	cout << setw(58) << "| 1  - VIEW LIST" << '|' << endl;
 	cout << setw(58) << "| 2  - ADD MEMBER" << '|' << endl;
 	cout << setw(58) << "| 3  - VIEW KEY MEMBERS" << '|' << endl;
+	cout << setw(58) << "| 4  - DELETE MEMBER" << '|' << endl;
+	cout << setw(58) << "| 5  - CHANGE MEMBER DATA" << '|' << endl;
 	cout << setfill('-') << setw(59) << left << '-' << endl;
 	cout << setfill(' ');
 
-	tempChoice = GetAndCheckInt(0, 3);
+	tempChoice = GetAndCheckInt(0, 5);
 	return tempChoice;
 
 }
 
-//administration page
-//will run swtich statement of options
+/*************************************************************************
+ *
+ * FUNCTION AdministrationPage
+ *________________________________________________________________________
+ * This function is the main program for the admin
+ *________________________________________________________________________
+ ************************************************************************/
 void BombClass::AdministrationPage()
 {
 
@@ -607,20 +726,33 @@ void BombClass::AdministrationPage()
 
 		if (choice != EXIT)
 		{
-			switch (choice) {
+			switch (choice)
+			{
 			case VIEW_LIST:
 
 				//calls display members
 				DisplayMemberList();
 				break;
 
+				//calls add members
 			case ADD_MEMBERS:
 				AddMembers();
 				break;
-				
+
+				//calls delete members
+			case DELETE_MEMBERS:
+				DeleteMembers();
+				break;
+
+				//calls change data
+			case CHANGE_DATA:
+				ChangeData();
+				break;
+
+				//calls view key customers
 			case VIEW_KEY_LIST:
-			DisplayKeyCustomers();
-			break;
+				DisplayKeyCustomers();
+				break;
 
 			}
 		}
@@ -629,6 +761,117 @@ void BombClass::AdministrationPage()
 
 }
 
+/*************************************************************************
+ *
+ * FUNCTION DeleteMembers
+ *________________________________________________________________________
+ * This function deletes members
+ *________________________________________________________________________
+ ************************************************************************/
+void BombClass::DeleteMembers()
+{
+
+	string searchName;  // name to search for
+	int index = 0;      // index for item found
+
+	cin.ignore(1000, '\n');
+
+	//input
+	cout << "\nEnter the name of the company you wish to delete: ";
+	getline(cin, searchName);
+
+	//function call
+	index = SearchCompanyName(searchName);
+
+	//deletes company
+	if (index != -1)
+	{
+		cout << "\nThe company " << list[index]->GetCompanyName()
+				<< " is deleted...\n\n";
+		list.erase(list.begin() + index);
+
+	}
+	else
+	{
+		cout << "\nCompany NOT found!\n\n";
+	}
+
+}
+
+/*************************************************************************
+ *
+ * FUNCTION DeleteMembers
+ *________________________________________________________________________
+ * This function allows admin to change data
+ *________________________________________________________________________
+ ************************************************************************/
+void BombClass::ChangeData()
+{
+	string searchName;
+	int index = 0;
+	string tempCustomerRating; //overloaded
+	string tempField;          //overloaded
+	string tempStreetAddress;  //have
+	string tempStateAddress;   //have
+
+
+	//output
+	cin.ignore(1000, '\n');
+	cout << "\nEnter the name of the company you wish to change: ";
+	getline(cin, searchName);
+	index = SearchCompanyName(searchName);
+
+	if (index != -1)
+	{
+		//output
+		cout << "\nEnter a customer rating"
+				"(Interested <very/not so much>: ";
+		getline(cin, tempCustomerRating);
+		cout << endl;
+
+		//function call
+		list[index]->SetCustomerRating(tempCustomerRating);
+
+		cout << "Company Street Address: ";
+		getline(cin, tempStreetAddress);
+		cout << endl;
+
+		//function call
+		cout << "Company State Address: ";
+		getline(cin, tempStateAddress);
+		cout << endl;
+
+		//function call
+		list[index]->SetAddressRating(tempStateAddress, tempStreetAddress);
+
+		if (list[index]->GetField() != "key")
+		{
+
+			cout << "\nEnter Field(nice to have? Not so much?): ";
+			getline(cin, tempField);
+
+			//function call
+			list[index]->SetField(tempField);
+
+
+		}
+		else
+		{
+			cout << "\n\nThis customer is a key customer.. already\n\n";
+		}
+
+	}
+	cout << endl;
+
+}
+
+/*************************************************************************
+ *
+ * FUNCTION AddMembers
+ *________________________________________________________________________
+ * This function adds members
+ *________________________________________________________________________
+ ************************************************************************/
 void BombClass::AddMembers()
 {
 
@@ -636,25 +879,31 @@ void BombClass::AddMembers()
 							   // function
 	KeyCustomer * tempKeyList; // temp Object to pass into vector method
 
-	string tempCompanyName;  //have
-	string tempStreetAddress;  //have
-	string tempStateAddress; //have
-	string tempCustomerRating; //overloaded
-	string tempField;          //overloaded
-	string tempTestimonial;    //have
+	//all temp data variables
+
+	string tempCompanyName;
+	string tempStreetAddress;
+	string tempStateAddress;
+	string tempCustomerRating;
+	string tempField;
+	string tempTestimonial;
 	string tempRecievedPamphlet;
 	ifstream infile;
 	char input;
 
+	//opens file
 	infile.open("CustomersToAdd.txt");
 
 	cout << "Add new members\n\n";
+
+	//must have data in file
 	if (NeedToAddMembers)
 	{
 		cout << "\n\nHere is the new member list:\n\n";
 		DisplayNewMembers();
 		cout << endl << endl;
 
+		//will read from the data
 		while (infile.good())
 		{
 			getline(infile, tempCompanyName);
@@ -663,10 +912,12 @@ void BombClass::AddMembers()
 
 				do
 				{
-					cout << "Is " << tempCompanyName << " a new KEY customer?: ";
+					cout << "Is " << tempCompanyName
+							<< " a new KEY customer?: ";
 					input = GetAndCheck('Y', 'N');
 				} while (input == 1);
 
+				//reads from file
 				getline(infile, tempStreetAddress);
 				getline(infile, tempStateAddress);
 				getline(infile, tempTestimonial);
@@ -674,23 +925,27 @@ void BombClass::AddMembers()
 
 				if (input == 'Y')
 				{
-					//cin.ignore(1000, '\n');
 					cout << "\n\nEnter a customer rating"
 							"(Interested <very/not so much>: ";
 					getline(cin, tempCustomerRating);
 
 					tempField = "key";
 
+					//creates a new object
 					tempKeyList = new KeyCustomer(tempCompanyName,
-							tempStreetAddress, tempStateAddress,
-							tempCustomerRating, tempField, tempTestimonial,
-							tempRecievedPamphlet);
+						tempStreetAddress, tempStateAddress,
+						tempCustomerRating, tempField, tempTestimonial,
+						tempRecievedPamphlet);
 
 					list.push_back(tempKeyList);
-				} else
+				}
+				else
 				{
-					tempList = new Customer(tempCompanyName, tempStreetAddress,
+					//creates a new object
+					tempList = new Customer(tempCompanyName,
+							tempStreetAddress,
 							tempStateAddress, tempTestimonial);
+
 					cin >> *tempList;
 					list.push_back(tempList);
 
@@ -704,23 +959,23 @@ void BombClass::AddMembers()
 
 		remove("CustomersToAdd.txt");
 
-		/****
-		 remove("CustomersToAdd.txt");
-		 if( remove( "CustomersToAdd.txt" ) != 0 )
-		 perror( "Error deleting file" );
-		 else
-		 puts("File successfully deleted");
-
-		 ***/
 		NeedToAddMembers = false;
 
-	} else
+	}
+	else
 	{
 		cout << "\nNo new customers requested a pamphlet!\n\n";
 	}
 
 }
 
+/*************************************************************************
+ *
+ * FUNCTION DisplayNewMembers
+ *________________________________________________________________________
+ * This function displays new members to be added
+ *________________________________________________________________________
+ ************************************************************************/
 void BombClass::DisplayNewMembers()
 {
 	ifstream infile;   //file to read
@@ -729,12 +984,14 @@ void BombClass::DisplayNewMembers()
 	string readStateAdd;
 	string tempTestimonial;
 
-	cout << setw(25) << "COMPANY" << setw(26) << "STREET ADDRESS" << setw(24)
-				<< "STATE ADDRESS" << setw(20) << "WRITTEN TESTIMONIAL?" << endl;
+	cout << setw(25) << "COMPANY" << setw(26)
+		 << "STREET ADDRESS" << setw(24)
+		 << "STATE ADDRESS" << setw(20) << "WRITTEN TESTIMONIAL?" << endl;
 	cout << setfill('-') << '-';
 
-	cout << setw(23) << '-' << " " << setw(24) << '-' << "  " << setw(23) << '-'
-			<< " " <<  setw(20) << '-' << " " <<  endl;
+	cout << setw(23) << '-' << " " << setw(24) << '-' << "  "
+			<< setw(23) << '-'
+			<< " " << setw(20) << '-' << " " << endl;
 
 	cout << setfill(' ');
 
@@ -745,15 +1002,16 @@ void BombClass::DisplayNewMembers()
 	{
 		getline(infile, readCompany);
 
-		if(readCompany.length() > 0)
+		if (readCompany.length() > 0)
 		{
-		getline(infile, readStreetAdd);
-		getline(infile, readStateAdd);
-		getline(infile, tempTestimonial);
-		cout << setw(25) << readCompany << setw(26) << readStreetAdd << setw(24)
-			 << readStateAdd << setw(20) << tempTestimonial << endl;
+			getline(infile, readStreetAdd);
+			getline(infile, readStateAdd);
+			getline(infile, tempTestimonial);
+			cout << setw(25) << readCompany << setw(26) << readStreetAdd
+					<< setw(24) << readStateAdd << setw(20)
+					<< tempTestimonial
+					<< endl;
 		}
-
 
 	}
 	infile.close();
@@ -761,6 +1019,13 @@ void BombClass::DisplayNewMembers()
 
 }
 
+/*************************************************************************
+ *
+ * FUNCTION EnterAdminPassword
+ *________________________________________________________________________
+ * This function allows a password to be entered
+ *________________________________________________________________________
+ ************************************************************************/
 bool BombClass::EnterAdminPassword()
 {
 
@@ -770,10 +1035,12 @@ bool BombClass::EnterAdminPassword()
 	cout << "Enter Password(ex:0000)\n";
 	login = GetAndCheckInt(1000, 9999);
 
+	//checks to see if the logon is correct
 	if (login == 1234)
 	{
 		RightPassword = true;
-	} else
+	}
+	else
 	{
 		cout << "\nIncorrect Password!\n\n";
 	}
@@ -782,27 +1049,30 @@ bool BombClass::EnterAdminPassword()
 
 }
 
+/*************************************************************************
+ *
+ * FUNCTION EnterAdminPassword
+ *________________________________________________________________________
+ * This function allows a password to be entered
+ *________________________________________________________________________
+ ************************************************************************/
 void BombClass::DisplayKeyCustomers()
 {
 	cout << "\n\nINFORMATION: \n\n";
 
 	cout << left;
 
-	/**
-	 * << setw(25) << "STREET ADDRESS" << setw(20)
-	 << "STATE ADDRESS" << setw(20) << "RATING" << setw(20) << "RECIEVED PAMPHLET"
-	 << setw(20) << "KEY" << setw(20) << endl;
-	 */
-
-	cout << setw(25) << "COMPANY" << setw(26) << "STREET ADDRESS" << setw(24)
-			<< "STATE ADDRESS" << setw(26) << "RATING" << setw(24)
-			<< "RECIEVED PAMPHLET" << setw(25) << "KEY" << endl;
+	cout << setw(25) << "COMPANY" << setw(26)
+		<< "STREET ADDRESS" << setw(24)
+		<< "STATE ADDRESS" << setw(26) << "RATING" << setw(24)
+		<< "RECIEVED PAMPHLET" << setw(25) << "KEY" << endl;
 
 	cout << setfill('-') << '-';
 
-	cout << setw(23) << '-' << " " << setw(24) << '-' << "  " << setw(23) << '-'
-			<< " " << setw(24) << '-' << "  " << setw(23) << '-' << " "
-			<< setw(15) << '-' << "  " << endl;
+	cout << setw(23) << '-' << " " << setw(24) << '-'
+		 << "  " << setw(23) << '-'
+		<< " " << setw(24) << '-' << "  " << setw(23) << '-' << " "
+		<< setw(15) << '-' << "  " << endl;
 
 	cout << setfill(' ');
 
@@ -825,6 +1095,13 @@ void BombClass::DisplayKeyCustomers()
 	cout << endl << endl;
 }
 
+/*************************************************************************
+ *
+ * FUNCTION EnterAdminPassword
+ *________________________________________________________________________
+ * This function views the purchase menu
+ *________________________________________________________________________
+ ************************************************************************/
 int BombClass::PurchaseMenu()
 {
 	int tempChoice = -1; // choice by user input
@@ -844,26 +1121,33 @@ int BombClass::PurchaseMenu()
 	return tempChoice;
 }
 
+/*************************************************************************
+ *
+ * FUNCTION Purchase
+ *________________________________________________________________________
+ * This function allows users to purchase items
+ *________________________________________________________________________
+ ************************************************************************/
 void BombClass::Purchase(ofstream &outfile)
 {
 	//VARIABLE DECLARATIONS
-	int choice;				//IN & OUT  - The user's menu selection
-	int quantity;			//IN & CALC - The purchase quantity
-	char answer;			//IN & OUT  - User's answer to purchase more
-	saleNode *newNode;		//CALC 	    - A new purchase node
-	saleNode *head;			//CALC		- head to the list
-	saleNode *tail;			//CALC 		- tail of the list
-	saleNode *tempPtr;		//CALC		- pointer to traverse the list
-	bool exit;				//CALC		- T/F to exit menu
+	int choice;        //IN & OUT  - The user's menu selection
+	int quantity;      //IN & CALC - The purchase quantity
+	char answer;       //IN & OUT  - User's answer to purchase more
+	saleNode *newNode; //CALC 	    - A new purchase node
+	saleNode *head;    //CALC		- head to the list
+	saleNode *tail;    //CALC 		- tail of the list
+	saleNode *tempPtr; //CALC		- pointer to traverse the list
+	bool exit;         //CALC		- T/F to exit menu
 
 	//VARIABLE INITIALIZATIONS
-	choice     = 0;
-	quantity   = 0;
-	head	   = NULL;
-	tail	   = NULL;
-	tempPtr    = head;
-	exit 	   = false;
-	answer	   = 1;
+	choice = 0;
+	quantity = 0;
+	head = NULL;
+	tail = NULL;
+	tempPtr = head;
+	exit = false;
+	answer = 1;
 
 	//PROCESSING - DO-WHILE - Used to output the menu and process the
 	//			   purchases. Exits once the user chooses to not add any
@@ -871,156 +1155,161 @@ void BombClass::Purchase(ofstream &outfile)
 	do
 	{
 		//PurchaseMenu - displays the purchases menu
+		cout << endl;
+		//cin.ignore(1000,'\n');
 		choice = PurchaseMenu();
 
 		//PROCESSING - SWITCH - Used to branch out into the different
 		//			   robot options
 		switch (choice)
 		{
-			case SALE_EXIT:	//Exits the switch
-							exit = true;
-							break;
-			case BASIC:		//Purchases a basic robot
-							//INPUT - Prompts user for quantity to buy
-							cout << "How many would you like to buy? ";
-							cin  >> quantity;
+		case SALE_EXIT:	//Exits the switch
+			exit = true;
+			break;
+		case BASIC:	//Purchases a basic robot
+					//INPUT - Prompts user for quantity to buy
+			cout << "\nHow many would you like to buy? ";
+			quantity = GetAndCheckInt(1, 3);
 
-							//Creates new node and adds data
-							newNode = new saleNode;
-							newNode->next = NULL;
-							newNode->robot = "Basic i-Robot";
-							newNode->price = 20000;
-							newNode->qty = quantity;
 
-							//PROCESSING - IF-THEN-ELSE - Used to check
-							//if the list is empty and add the node
-							if(head == NULL)
-							{
-								 head = newNode;
-								 tail = newNode;
-							}
-							else
-							{
-								tempPtr = head;
-								while(tempPtr->next != NULL)
-								{
-									tempPtr = tempPtr->next;
-								}
-								tempPtr->next = newNode;
-								tail = newNode;
-							}
+			//Creates new node and adds data
+			newNode = new saleNode;
+			newNode->next = NULL;
+			newNode->robot = "Basic i-Robot";
+			newNode->price = 20000;
+			newNode->qty = quantity;
 
-							//INPUT - Prompts user to buy more
-							do
-							{
-								cout << "Would you like to buy more? ";
-								answer = GetAndCheck('Y', 'N');
-							}
-							while(answer == 1);
+			//PROCESSING - IF-THEN-ELSE - Used to check
+			//if the list is empty and add the node
+			if (head == NULL)
+			{
+				head = newNode;
+				tail = newNode;
+			} else
+			{
+				tempPtr = head;
+				while (tempPtr->next != NULL)
+				{
+					tempPtr = tempPtr->next;
+				}
+				tempPtr->next = newNode;
+				tail = newNode;
+			}
 
-							//PROCESSING - IF-THEN - Used to check if
-							//answers is N to checkout and exit
-							if(answer == 'N')
-							{
-								CheckOut(head, outfile);
-								exit = true;
-							}
-							break;
-			case DESTROYER:	//Purchases a Bomb Destroyer Robot
-							//INPUT - Prompts user for quantity to buy
-							cout << "How many would you like to buy? ";
-							cin  >> quantity;
-							newNode = new saleNode;
-							newNode->next = NULL;
-							newNode->robot = "Bomb Destroyer";
-							newNode->price = 35000;
-							newNode->qty = quantity;
+			//INPUT - Prompts user to buy more
+			do
+			{
+				cout << "\nWould you like to buy more? ";
+				answer = GetAndCheck('Y', 'N');
+			} while (answer == 1);
 
-							//PROCESSING - IF-THEN-ELSE - Used to check
-							//if the list is empty and add the node
-							if(head == NULL)
-							{
-								 head = newNode;
-								 tail = newNode;
-							}
-							else
-							{
-								tempPtr = head;
-								while(tempPtr->next != NULL)
-								{
-									tempPtr = tempPtr->next;
-								}
-								tempPtr->next = newNode;
-								tail = newNode;
-							}
+			//PROCESSING - IF-THEN - Used to check if
+			//answers is N to checkout and exit
+			if (answer == 'N')
+			{
+				CheckOut(head, outfile);
+				exit = true;
+			}
+			break;
+		case DESTROYER:	//Purchases a Bomb Destroyer Robot
+						//INPUT - Prompts user for quantity to buy
+			cout << "\nHow many would you like to buy? ";
+			quantity = GetAndCheckInt(1, 3);
+			newNode = new saleNode;
+			newNode->next = NULL;
+			newNode->robot = "Bomb Destroyer";
+			newNode->price = 35000;
+			newNode->qty = quantity;
 
-							//INPUT - Prompts user to buy more
-							do
-							{
-								cout << "Would you like to buy more? ";
-								answer = GetAndCheck('Y', 'N');
-							}
-							while(answer == 1);
+			//PROCESSING - IF-THEN-ELSE - Used to check
+			//if the list is empty and add the node
+			if (head == NULL)
+			{
+				head = newNode;
+				tail = newNode;
+			} else
+			{
+				tempPtr = head;
+				while (tempPtr->next != NULL)
+				{
+					tempPtr = tempPtr->next;
+				}
+				tempPtr->next = newNode;
+				tail = newNode;
+			}
 
-							//PROCESSING - IF-THEN - Used to check if
-							//answers is N to checkout and exit
-							if(answer == 'N')
-							{
-								CheckOut(head, outfile);
-								exit = true;
-							}
-							break;
+			//INPUT - Prompts user to buy more
+			do
+			{
+				cout << "\nWould you like to buy more? ";
+				answer = GetAndCheck('Y', 'N');
+			} while (answer == 1);
 
-			case ULTRA_BOT:	//Purchases an Ultra-Bot robot
-							//INPUT - Prompts user for quantity to buy
-							cout << "How many would you like to buy? ";
-							cin  >> quantity;
-							newNode = new saleNode;
-							newNode->next = NULL;
-							newNode->robot = "Ultra-Bot";
-							newNode->price = 99999;
-							newNode->qty = quantity;
+			//PROCESSING - IF-THEN - Used to check if
+			//answers is N to checkout and exit
+			if (answer == 'N')
+			{
+				CheckOut(head, outfile);
+				exit = true;
+			}
+			break;
 
-							//PROCESSING - IF-THEN-ELSE - Used to check
-							//if the list is empty and add the node
-							if(head == NULL)
-							{
-								 head = newNode;
-								 tail = newNode;
-							}
-							else
-							{
-								tempPtr = head;
-								while(tempPtr->next != NULL)
-								{
-									tempPtr = tempPtr->next;
-								}
-								tempPtr->next = newNode;
-								tail = newNode;
-							}
+		case ULTRA_BOT:	//Purchases an Ultra-Bot robot
+						//INPUT - Prompts user for quantity to buy
+			cout << "\nHow many would you like to buy? ";
+			quantity = GetAndCheckInt(1, 3);
+			newNode = new saleNode;
+			newNode->next = NULL;
+			newNode->robot = "Ultra-Bot";
+			newNode->price = 99999;
+			newNode->qty = quantity;
 
-							//INPUT - Prompts user to buy more
-							do
-							{
-								cout << "Would you like to buy more? ";
-								answer = GetAndCheck('Y', 'N');
-							}
-							while(answer == 1);
+			//PROCESSING - IF-THEN-ELSE - Used to check
+			//if the list is empty and add the node
+			if (head == NULL)
+			{
+				head = newNode;
+				tail = newNode;
+			} else
+			{
+				tempPtr = head;
+				while (tempPtr->next != NULL)
+				{
+					tempPtr = tempPtr->next;
+				}
+				tempPtr->next = newNode;
+				tail = newNode;
+			}
 
-							//PROCESSING - IF-THEN - Used to check if
-							//answers is N to checkout and exit
-							if(answer == 'N')
-							{
-								CheckOut(head, outfile);
-								exit = true;
-							}
-							break;
+			//INPUT - Prompts user to buy more
+			do
+			{
+				cout << "\nWould you like to buy more? ";
+				answer = GetAndCheck('Y', 'N');
+			} while (answer == 1);
+
+			//PROCESSING - IF-THEN - Used to check if
+			//answers is N to checkout and exit
+			if (answer == 'N')
+			{
+				CheckOut(head, outfile);
+				exit = true;
+			}
+			break;
 		}
-	}while(!exit);
+	} while (!exit);
 }
 
+/*************************************************************************
+ *
+ * FUNCTION CheckOut
+ *________________________________________________________________________
+ * This function allows users to check out items
+ *________________________________________________________________________
+ ************************************************************************/
 void BombClass::CheckOut(saleNode *head, ofstream &outfile)
 {
+	//variables for checkout
 	float subTotal;
 	float total;
 	float tax;
@@ -1033,9 +1322,8 @@ void BombClass::CheckOut(saleNode *head, ofstream &outfile)
 	saleNode *tempPtr;
 
 	subTotal = 0;
-	total	 = 0;
-	tax		 = 0;
-
+	total = 0;
+	tax = 0;
 
 	outfile.open("CustomersToAdd.txt", std::fstream::app);
 
@@ -1044,7 +1332,7 @@ void BombClass::CheckOut(saleNode *head, ofstream &outfile)
 	{
 		cout << "\nAre you already a customer on our list?: ";
 		data = GetAndCheck('Y', 'N');
-	}while (data == 1);
+	} while (data == 1);
 
 	//PROCESSING - IF-THEN-ELSE - If user is not on the list their info
 	//			   is requested
@@ -1074,44 +1362,48 @@ void BombClass::CheckOut(saleNode *head, ofstream &outfile)
 		outfile << tempTestimonial << endl;
 
 		//OUTPUT - Prints receipt
-		cout << "-------------------------------------" << endl
-			 << right << setw(22) << "I-ROBOT" << endl
-			 << setw(25) << "SALES RECEIPT" << endl
-			 << "-------------------------------------" << endl
-			 << left << setw(9) << "Name: " << tempCompanyName << endl
-			 << setw(9) << "Address: " << tempStreetAddress << endl
-			 << setw(9) << " " << tempStateAddress << endl
-			 << "-------------------------------------" << endl;
+		cout << "-------------------------------------" << endl << right
+			<< setw(22) << "I-ROBOT" << endl << setw(25) << "SALES RECEIPT"
+			<< endl << "-------------------------------------" << endl
+			<< left << setw(9) << "Name: " << tempCompanyName << endl
+			<< setw(9) << "Address: " << tempStreetAddress << endl
+			<< setw(9) << " " << tempStateAddress << endl
+			<< "-------------------------------------" << endl;
 
 		tempPtr = head;
 
 		//PROCESSING - WHILE - Used to traverse the list and print the
 		//			   items purchased
-		while(tempPtr != NULL)
+		while (tempPtr != NULL)
 		{
-			cout << left << setw(24) << tempPtr->robot << " $"
-				 << fixed << setprecision(2) << right << setw(11)
-				 << tempPtr->price * tempPtr->qty  <<  endl
-				 << tempPtr->qty << " @ $" << tempPtr->price
-				 << endl << endl;
+			cout << left << setw(24) << tempPtr->robot << " $" << fixed
+					<< setprecision(2) << right << setw(11)
+					<< tempPtr->price * tempPtr->qty << endl
+					<< tempPtr->qty
+					<< " @ $" << tempPtr->price << endl << endl;
 			subTotal = subTotal + (tempPtr->price * tempPtr->qty);
 
 			tempPtr = tempPtr->next;
 		}
 
 		//PROCESSING - Calculates tax and grand total
-		tax = (subTotal * CA_TAX)/100;
+		tax = (subTotal * CA_TAX) / 100;
 		total = subTotal + tax;
 
 		//OUTPUT - Prints the last part of the receipt
 		cout << "-------------------------------------" << endl << left
-			 << setw(25) << "SUBTOTAL" << "$" << right << setw(11)
-			 << subTotal << endl << "Tax CA %" << left << setw(17)
-			 << CA_TAX << "$" << right << setw(11) << tax << endl << left
-			 << setw(25) << "TOTAL" << "$" << right << setw(11) << total
-			 << endl << "-------------------------------------" << endl
-			 << setw(32) << "Thank you for your purchase" << endl
-			 << setw(28) << "Tip the programmer!" << endl << endl;
+				<< setw(25) << "SUBTOTAL"
+				<< "$" << right << setw(11)
+				<< subTotal << endl << "Tax CA %"
+				<< left << setw(17) << CA_TAX
+				<< "$" << right << setw(11) << tax
+				<< endl << left << setw(25)
+				<< "TOTAL" << "$" << right
+				<< setw(11) << total << endl
+				<< "-------------------------------------"
+				<< endl << setw(32)
+				<< "Thank you for your purchase" << endl << setw(28)
+				<< "Tip the programmer!" << endl << endl;
 
 		NeedToAddMembers = true;
 	}
@@ -1124,56 +1416,70 @@ void BombClass::CheckOut(saleNode *head, ofstream &outfile)
 			getline(cin, tempCompanyName);
 			cout << endl;
 			searchReturn = SearchCompanyName(tempCompanyName);
-			if(searchReturn == -1)
+			if (searchReturn == -1)
 			{
 				cout << "\n\nCompany is not in our system!\n\n";
 			}
-		}while(searchReturn == -1);
+		} while (searchReturn == -1);
 
-		if(searchReturn != -1)
+		if (searchReturn != -1)
 		{
 			cout << tempCompanyName << " found!\n\n";
 
 			list[searchReturn]->SetRevcievedPamphlet("Yes");
 
-			cout << "-------------------------------------" << endl
-				 << right << setw(22) << "I-ROBOT" << endl
-				 << setw(25) << "SALES RECEIPT" << endl
-				 << "-------------------------------------" << endl
-				 << left << setw(9) << "Name: "
-				 << list[searchReturn]->GetCompanyName() << endl
-				 << setw(9) << "Address: "
-				 << list[searchReturn]->GetStreetAddress() << endl
-				 << setw(9) << " " << list[searchReturn]->GetStateAddress()
-				 << endl << "-------------------------------------" << endl;
+			cout << "-------------------------------------"
+					<< endl << right
+					<< setw(22) << "I-ROBOT" << endl << setw(25)
+					<< "SALES RECEIPT" << endl
+					<< "-------------------------------------"
+					<< endl << left
+					<< setw(9) << "Name: "
+					<< list[searchReturn]->GetCompanyName()
+					<< endl << setw(9)
+					<< "Address: "
+					<< list[searchReturn]->GetStreetAddress()
+					<< endl << setw(9) << " "
+					<< list[searchReturn]->GetStateAddress() << endl
+					<< "-------------------------------------" << endl;
 
 			tempPtr = head;
 
-			while(tempPtr != NULL)
+			while (tempPtr != NULL)
 			{
 				cout << left << setw(24) << tempPtr->robot << " $"
-					 << fixed << setprecision(2) << right << setw(11)
-					 << tempPtr->price * tempPtr->qty  <<  endl
-					 << tempPtr->qty << " @ $" << tempPtr->price
-					 << endl << endl;
+						<< fixed
+						<< setprecision(2) << right
+						<< setw(11)
+						<< tempPtr->price * tempPtr->qty
+						<< endl << tempPtr->qty
+						<< " @ $" << tempPtr->price
+						<< endl << endl;
 				subTotal = subTotal + (tempPtr->price * tempPtr->qty);
 				tempPtr = tempPtr->next;
 			}
 
-			tax = (subTotal * CA_TAX)/100;
+			tax = (subTotal * CA_TAX) / 100;
 			total = subTotal + tax;
 
-			cout << "-------------------------------------" << endl << left
-				 << setw(25) << "SUBTOTAL" << "$" << right << setw(11)
-				 << subTotal << endl << "Tax CA %" << left << setw(17)
-				 << CA_TAX << "$" << right << setw(11) << tax << endl
-				 << left << setw(25) << "TOTAL" << "$" << right << setw(11)
-				 << total << endl << "-------------------------------------"
-				 << endl << setw(32) << "Thank you for your purchase"
-				 << endl << setw(36) << "Your robot(s) will ship in 5-7 days"
-				 << endl << endl;
+			cout << "-------------------------------------"
+					<< endl << left
+					<< setw(25) << "SUBTOTAL" << "$" << right << setw(11)
+					<< subTotal << endl << "Tax CA %" << left << setw(17)
+					<< CA_TAX << "$" << right << setw(11) << tax
+					<< endl << left
+					<< setw(25) << "TOTAL" << "$" << right
+					<< setw(11) << total
+					<< endl << "-------------------------------------"
+					<< endl
+					<< setw(32) << "Thank you for your purchase" << endl
+					<< setw(36) << "Your robot(s) will ship in 5-7 days"
+					<< endl
+					<< endl;
 		}
 	}
+
+
 
 	outfile.close();
 	outfile.clear();

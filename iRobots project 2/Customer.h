@@ -23,7 +23,7 @@ private:
 	string stateAddress;
 	string customerRating;
 	string testimonial;
-	float amountSpent;
+	float *amountSpent;
 	string pamphletSent;
 	string field;
 
@@ -32,6 +32,7 @@ public:
 	Customer();
 	//default constructor
 
+	Customer(Customer &anotherNode);
 	Customer(string, string, string, string, string, string, string);
 	//non-default constructor
 	Customer(string, string, string, string);
@@ -57,8 +58,12 @@ public:
 	string GetCustomerRating();
 	string GetPamphlet();
 	virtual string GetField();
+
 	void SetTestimonial(string);
 	void SetRevcievedPamphlet(string);
+	void SetCustomerRating(string);
+	void SetAddressRating(string, string);
+	void SetField(string);
 };
 
 #endif /* CUSTOMER_H_ */

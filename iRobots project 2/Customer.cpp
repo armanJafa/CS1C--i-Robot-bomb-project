@@ -17,7 +17,7 @@ Customer::Customer()
 	stateAddress.clear();
 	customerRating.clear();
 	testimonial.clear();
-	amountSpent = 0.0;
+	amountSpent = NULL;
 	pamphletSent.clear();
 	field.clear();
 }
@@ -36,7 +36,8 @@ Customer::Customer(string tempCompanyName, string tempStreetAddress,
 	this->testimonial = tempTestimonial;
 	this->pamphletSent = pamphletSent;
 
-	amountSpent = 0;
+	amountSpent = new float;
+	*amountSpent = 0;
 
 }
 
@@ -49,7 +50,8 @@ Customer::Customer(string tempCompanyName, string tempStreetAddress,
 	this->stateAddress = tempStateAddress;
 	this->testimonial = tempTestimonial;
 
-	amountSpent = 0;
+	amountSpent = new float;
+	*amountSpent = 0;
 	pamphletSent = "Yes";
 
 }
@@ -98,11 +100,56 @@ string Customer::GetPamphlet()
 
 }
 
-void Customer:: SetRevcievedPamphlet(string tempPamphlet)
+void Customer::SetRevcievedPamphlet(string tempPamphlet)
 {
 
 	this->pamphletSent = tempPamphlet;
 
+}
+
+/*************************************************************************
+ *
+ * FUNCTION Default Copy function
+ *________________________________________________________________________
+ * This function will copy the elements of one object into a new object.
+ * Used when objects are passed by value or assigned to one another
+ *________________________________________________________________________
+ ************************************************************************/
+Customer::Customer(Customer &anotherNode) // object to be made a
+// copy
+{
+	//SETS ALL DATA MEMBERS TO OBJECT BEING PASSED IN BASED OFF THE OBJECT
+	//THAT THE FUNCTION IS CALLED FROM
+
+	companyName = anotherNode.companyName;
+	streetAddress = anotherNode.streetAddress;
+	stateAddress = anotherNode.stateAddress;
+	testimonial = anotherNode.testimonial;
+
+	customerRating = anotherNode.customerRating;
+	field = anotherNode.field;
+	pamphletSent = anotherNode.pamphletSent;
+	amountSpent = new float;
+	amountSpent = anotherNode.amountSpent;
+
+	//cout << "\n -copy constructor is called\n" << endl;
+
+}
+
+void Customer::SetCustomerRating(string customerRating)
+{
+
+	this->customerRating = customerRating;
+}
+
+void Customer::SetAddressRating(string stateAddress, string streetAddress)
+{
+	this->stateAddress = stateAddress;
+	this->streetAddress = streetAddress;
+}
+void Customer::SetField(string field)
+{
+	this->field = field;
 }
 
 //virtual function, base data printed
@@ -110,16 +157,8 @@ void Customer::Print()
 {
 
 	cout << setw(25) << companyName << setw(26) << streetAddress << setw(24)
-			 << stateAddress << setw(26) << customerRating << setw(24);
-			 cout << pamphletSent << setw(25);
-
-	//cout << companyName << endl;
-	//cout << streetAddress << endl;
-	//cout << stateAddress << endl;
-	//cout << customerRating << endl;
-	//cout << testimonial << endl;
-	//cout << pamphletSent << endl;
-
+			<< stateAddress << setw(26) << customerRating << setw(24);
+	cout << pamphletSent << setw(25);
 
 	if (field != "key")
 	{
@@ -128,18 +167,15 @@ void Customer::Print()
 		cout << endl;
 	}
 
-
-
 }
 
 void Customer::PrintKeyCustomer()
 {
 
-	if(field=="key")
+	if (field == "key")
 	{
-		cout << setw(25) << companyName << setw(26) << streetAddress
-			 << setw(24) << stateAddress << setw(26) << customerRating
-			 << setw(24);
+		cout << setw(25) << companyName << setw(26) << streetAddress << setw(24)
+				<< stateAddress << setw(26) << customerRating << setw(24);
 		cout << pamphletSent << setw(25);
 		cout << field;
 		cout << endl;
@@ -150,7 +186,7 @@ void Customer::PrintKeyCustomer()
 bool Customer::operator >(Customer& otherCustomer)
 //Overloaded greater than operator. Used for sorting.
 {
-	return(companyName > otherCustomer.companyName);
+	return (companyName > otherCustomer.companyName);
 }
 
 //Overloaded Insertion Operator

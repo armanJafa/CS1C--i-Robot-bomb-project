@@ -8,6 +8,7 @@
  **********************************************************/
 #include"BombClass.h"
 
+//name spaces
 namespace AustinsNameSpace
 {
 	int choice = 0;
@@ -20,8 +21,6 @@ using namespace AustinsNameSpace;
 
 int main()
 {
-
-
 
 	//function call to generate list
 	bombInventory.CreateMemberList(infile);
@@ -39,26 +38,33 @@ int main()
 			switch (choice)
 			{
 
-			//only option avalible for customers at this time
 			case VIEW_PAMPHLET:
 
+				//function call to view pamphlet
 				bombInventory.DisplayPamphlet();
 				break;
 
 			case VIEW_TESTIMONIALS:
+
+				//function call
 				bombInventory.ViewTestimonials();
 				break;
 
 			case ADD_TESTIMONIALS:
+
+				//function call
 				bombInventory.WriteTestimonials();
 				break;
 
 			case REQUEST_A_PAMPHLET:
 
+				//function call
 				bombInventory.RequestAPamphlet(outfile);
 				break;
 
 			case ORDER_ROBOTS:
+
+				//function call
 				bombInventory.Purchase(outfile);
 				break;
 
@@ -67,12 +73,14 @@ int main()
 				bombInventory.DisplayHelpPage();
 				break;
 
-			//only option avalible for Admin at this time
+			//admin options
 			case ADMIN_OPTIONS:
 
 				cout << endl;
+
 				if(bombInventory.EnterAdminPassword())
 				{
+					//function call
 					bombInventory.AdministrationPage();
 				}
 
@@ -80,6 +88,7 @@ int main()
 
 			}
 
+			//function call
 			bombInventory.SaveBetweenExecutions();
 		}
 

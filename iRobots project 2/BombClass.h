@@ -31,7 +31,9 @@ enum AdminChoice
 	ADMIN_MENU_EXIT,
 	VIEW_LIST,
 	ADD_MEMBERS,
-	VIEW_KEY_LIST
+	VIEW_KEY_LIST,
+	DELETE_MEMBERS,
+	CHANGE_DATA
 };
 
 //used for purchase menu
@@ -85,25 +87,40 @@ public:
 	//search company name in order to write a tesimonial
 
 	bool EnterAdminPassword();
+	//enter a password to access menu
 
 	void DisplayHelpPage();
 	//Displays help menu
+
 	void SaveBetweenExecutions();
+	//saves file between executions
 
 	void RequestAPamphlet(ofstream&);
+	//users can request a pamphlet
 
 	void DisplayKeyCustomers();
+	//admin can view key customers
 
 	int PurchaseMenu();
+	//customers can purchase robots
 
 	void Purchase(ofstream &outfile);
+	//the actual purchase location code
 
 	void CheckOut(saleNode *head, ofstream &outfile);
+	//will checkout all the robots bought
+
+	void DeleteMembers();
+	//will delete members
+
+	void ChangeData();
+	//chnages data
 
 
 
 private:
 
+	//USING CLASS TEMPLATES
 	vector<Customer*> list; //list of customer pointers
 	//without pointer, only stores copies
 
@@ -123,11 +140,21 @@ private:
 
 	//helper function, can be viewd within AdministrationPage() only
 	void DisplayMemberList();
+
 	void DisplayKeyMemberList();
+	//displays the key members
+
 	void AddMembers();
+	//adds members
+
 	void DisplayNewMembers();
+	//displays new members who need to be added
+
 	char GetAndCheck(char val1, char val2);
+	//checks char values
+
 	void SendPamphletToListCustomers();
+	//sends pamphlet
 };
 
 #endif /* BOMBCLASS_H_ */

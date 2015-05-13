@@ -45,6 +45,7 @@ basic i- robot:
  - easy controlling
  - equipt with dirt wheels only
  - defuses bombs in 1 minute
+ - 1 year damage protection
 
 	cost: $20,000
 
@@ -54,6 +55,7 @@ Bomb destroyer Robot:
 - can defuse bombs in 30 seconds
 - comes with all different enviromental wheels
 - Power shield included 
+- 3 year damage protection
 
 	cost: $35,000
 
@@ -64,7 +66,24 @@ Utra-bot
 - liquid metal action, can reform if exploded
 - virtual reality camera is included
 - lifetime garrentee included 
+- lifetime damage protection
 
 	cost $99,999
+	
+maintenance plan:
+
+Our robots are so high tech that they will not break! But in case they are injured in a bomb 
+explosion, we will fix the robots for a certain amount of years(based on the type of robot).
+
+Our garentee:
+
+I-robots will not dissapoint! Our company has developed a great investment, and therefore
+ all of our robots are a lifetime garrenteed if damged other than getting blown up due to bombs.
+ 
+ CONTACT US:
+ 
+ CLICK REQUEST A PAMPHLET TO BE ADDED TO OUR LIST OF MEMBERS AND GET YOUR OWN COPY OF THIS PAMPHLET
+
+	
 
 ******************************************************************************************************
